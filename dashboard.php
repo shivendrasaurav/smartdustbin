@@ -1,5 +1,5 @@
 <?php
-
+    $contents = 81;
 ?>
 
 <html>
@@ -10,8 +10,9 @@
         <link href="https://fluentdesignforweb.github.io/Icons/css/fluent-icons.css"  rel="stylesheet" type="text/css">
         <script src="https://fluentdesignforweb.github.io/fluent.js"></script>
         <link href="customstyles.css"  rel="stylesheet" type="text/css">
+        <script src="progress_anim.js"></script>
     </head>
-    <body>
+    <body onload="progress_anim1();">
         <div class="sidepanel_container" id="side1">
             <div class="sidepanel_content zi3">
                 <button class="primary_red left ta_center mod_close_btn" onclick="closeside1();">X</button>
@@ -40,7 +41,8 @@
 
             <div class="column large12 medium12 small12 center primary_white zi2">
                 <p>Dustbin Location: Some Location</p>
-                <div class="progress_bar" style="height: 40px">
+                <div class="progress_container">
+                    <div class="progress_bar" style="width: <?php echo($contents)?>%" id="d1"></div>
                 </div>
                 <h6>Last Emptied: in Hrs</h6>
                 <div class="tooltip_container right">
