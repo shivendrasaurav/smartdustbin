@@ -1,5 +1,43 @@
 <?php
-    $contents = 81;
+    $content1 = 81;
+    $content2 = 51;
+
+
+    //Creates new record as per request
+    //Connect to database
+    $hostname = "localhost";		//example = localhost or 192.168.0.0
+    $username = "santoshdkolur";		//example = root
+    $password = "santoshdkolur";	
+    $dbname = "hack";
+    // Create connection
+    $conn = mysqli_connect($hostname, $username, $password, $dbname);
+    // Check connection
+    if (!$conn) {
+        die("Connection failed !!!");
+    } 
+
+    $table = mysqli_query($conn, "SELECT * FROM hackfest where dustbin_no=1 order by t desc limit 1;"); //nodemcu_ldr_table = Youre_table_name
+    while($row = mysqli_fetch_array($table))
+    {
+
+        $dno1 = $row["dustbin_no"];
+        $content1 = $row["contents"];
+        $loc1 = $row["loc"];
+        $pin1 = $row["pincode"];
+        $time1 = $row["t"];
+    }
+
+    $table = mysqli_query($conn, "select * from hackfest where dustbin_no=2 order by t desc limit 1;"); //nodemcu_ldr_table = Youre_table_name
+    while($row = mysqli_fetch_array($table))
+    {
+
+        $dno2 = $row["dustbin_no"];
+        $content2 = $row["contents"];
+        $loc2 = $row["loc"];
+        $pin2 = $row["pincode"];
+        $time2 = $row["t"];
+    }
+
 ?>
 
 <html>
@@ -18,12 +56,9 @@
                 <button class="primary_red left ta_center mod_close_btn" onclick="closeside1();">X</button>
                 <br><br><br><br>
                 <div class="page_container">
-                    <div class="panel_item ta_right">Panel Item 1</div><br>
-                    <div class="panel_item ta_right">Panel Item 2</div><br>
-                    <div class="panel_item ta_right">Panel Item 3</div><br>
-                    <div class="panel_item ta_right">Panel Item 4</div><br>
-                    <div class="panel_item ta_right">Panel Item 5</div><br>
-                    <div class="panel_item ta_right">Panel Item 6</div><br>
+                    <div class="panel_item ta_right">Dashboard</div><br>
+                    <div class="panel_item ta_right">Predict</div><br>
+                    <div class="panel_item ta_right">Navigate</div><br>
                 </div>
             </div>
         </div>
@@ -39,20 +74,41 @@
 
             <br><br>
 
+            <h3>Dashboard: </h3>
+
+            <br><br>
+
             <div class="column large12 medium12 small12 center primary_white zi2">
-                <p>Dustbin Location: Some Location</p>
+                <p>Dustbin <?php echo("{$dno1}: {$pin1}");?></p>
                 <div class="progress_container">
-                    <div class="progress_bar" style="width: <?php echo($contents)?>%" id="d1"></div>
+                    <div class="progress_bar" style="width: <?php echo($content1)?>%" id="d1"></div>
                 </div>
-                <h6>Last Emptied: in Hrs</h6>
+                <h6>Last Updated: <?php echo("{$time1}"); ?></h6>
+            </div>
+
+            <br><br>
+
+            <div class="column large12 medium12 small12 center primary_white zi2">
+                <p>Dustbin <?php echo("{$dno2}: {$pin2}");?></p>
+                <div class="progress_container">
+                    <div class="progress_bar" style="width: <?php echo($content2)?>%" id="d2"></div>
+                </div>
+                <h6>Last Updated: <?php echo("{$time2}"); ?></h6>
+            </div>
+
+            <br><br>
+
+            <div class="column large12 medium12 small12 center primary_white zi2">
+
                 <div class="tooltip_container right">
-                    <span class="tooltip_info">Can be used to navigate to the desired dustbin</span>
-                    <button class="primary_green">Navigate</button>
-                </div>
-                <div class="tooltip_container">
-                    <span class="tooltip_info">Can be used to predict when dustbin will be full</span>
-                    <button class="primary_green">Predict</button>
-                </div>
+                        <span class="tooltip_info">Can be used to navigate to the desired dustbin</span>
+                        <button class="primary_green">Navigate</button>
+                    </div>
+                    <div class="tooltip_container">
+                        <span class="tooltip_info">Can be used to predict when dustbin will be full</span>
+                        <button class="primary_green">Predict</button>
+                    </div>
+
             </div>
 
         </div>
