@@ -16,3 +16,26 @@
     0%{width: 0%;}
     100%{width: 100%;}
 }
+
+svg{
+    width: 100%;
+    height: 60%;
+}
+.deactivated{
+    fill: #BBB;
+}
+.activated{
+    fill: #E50C55;
+}
+line{
+    stroke: #BBB;
+    stroke-width: 3px;
+}
+line.deactivated{
+    stroke: #f1f1f1;
+    stroke-width: 3px;
+}
+line.activated{
+    stroke: #E50C55;
+    stroke-width: 5px;
+}
